@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>{% block title %}Search{% endblock title%}</title>
+    </head>
+    <body>
+    {% block body %}
+        <img class="logo"
+     src="/Users/yun-yeogyeong/Desktop/web/googleSearch/googlelogo.png"
+     alt="Google">
+
+        <form action="https://google.com/search">
+            <input type="text" name="q">
+            <input type="submit" value="Google Search">
+        </form>
+
+        <form action="https://www.google.com/doodles/">
+            <input type="submit" value="I'm Feeling Lucky">
+        </form>
+    {% endblock %}
+    </body>
+</html>
+
+
