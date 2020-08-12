@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Edit wiki on your own.
+{% endblock %}
+
+{% block body %}
+    <h1>Edit wiki</h1>
+    <form method = "post">
+        {% csrf_token %}
+        {{ edit }}
+        <input type = "submit">
+    </form>
+{% endblock %}

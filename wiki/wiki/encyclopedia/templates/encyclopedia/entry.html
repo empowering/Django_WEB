@@ -1,10 +1,15 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    ?
+    {{ title }}
 {% endblock %}
 
 {% block body %}
-    <h1>{entries}</h1>
+<!--{{ description | safe }} for convert str to html code-->
+
+    {{ content | safe }} 
+
+    <a class="btn btn-primary" href=/edit/{{title}}>Edit</a>
+
 
 {% endblock %}
