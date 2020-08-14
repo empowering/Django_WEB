@@ -1,12 +1,12 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
-    {% for listing in listings %}
+    <h2>Watch-list</h2>
+
+    {% for listing in profile.watchlist.all %}
     <ul>
         <li><a href="{% url 'detail' listing.list_id %}">{{ listing.name }}</a></li>
         <li>Price : ${{ listing.price }}</a></li>
-        <li>Date : {{ listing.date }}</a></li>
         <li>Image : {{ listing.image }}</a></li>
     </ul>
     {% endfor %}

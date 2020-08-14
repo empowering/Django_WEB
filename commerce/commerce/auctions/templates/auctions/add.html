@@ -8,9 +8,7 @@
     
     <form action="{% url 'add' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        제목 : <input type="text" name="name"><br>
-        가격 : <input type="number" name="price"><br>
-        이미지 : <input type="file" name="image"><br>
+        {{ form }}
         <input type="submit">
     </form>
     {% comment %} <form action="{% url 'add' %}" method = "post">

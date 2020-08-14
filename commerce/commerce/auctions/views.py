@@ -2,8 +2,10 @@ from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 import datetime
 
@@ -13,6 +15,14 @@ from .models import User, Listing
 class AddForm(forms.Form):
     name = forms.CharField(max_length=50)
     price = forms.FloatField()
+    description = forms.CharField(max_length=100)
+    OPTIONS = (
+        ('clothing','Clothing'),
+        ('crafts','Crafts'),
+        ('home','Home'), 
+        ('pet','Pet'), 
+    )
+    category = forms.ChoiceField(required=True, choices=OPTIONS)
     # image = forms.FileField()
 
 def index(request):
@@ -81,16 +91,24 @@ def add(request):
         if form.is_valid():
             name = form.cleaned_data["name"]
             price = form.cleaned_data["price"]
-            image = Post(image=request.FILES['image'])
+            category = form.cleaned_data["category"]
+            description = form.cleaned_data["description"]
+            category = form.cleaned_data["category"]
+            # image = Post(image=request.FILES['image'])
 
             # save as dict
             newdata = {
                 "name": name,
                 "price": price,
-                "image" : image
+                "author" : request.user,
+                "description" : description,
+                "category" : category
+                # "image" : image
                 }
 
-            listing = Listing(name = name, price = price, image = image)
+            listing = Listing(name = name, price = price, author = request.user, description = description,
+                category = category)
+            # , image = image)
             listing.save()
 
             return HttpResponseRedirect(reverse("index"))
@@ -104,3 +122,49 @@ def add(request):
         {
             "form" : AddForm()
         })
+
+def detail(request, list_id):
+    content = Listing.objects.get(list_id=list_id)
+    user = request.user
+    profile = User.objects.get(username=user)
+
+    return render(request, "auctions/detail.html",{
+        "content" : content,
+        "profile" : profile
+    })
+
+@login_required
+def post_like_toggle(request, list_id):
+    post = Listing.objects.get(list_id=list_id)
+    user = request.user
+    profile = User.objects.get(username=user)
+
+    check_watchlist = profile.watchlist.filter(list_id=list_id)
+
+    if check_watchlist.exists():
+        profile.watchlist.remove(post)
+        post.likes -= 1
+        post.save()
+    else:
+        profile.watchlist.add(post)
+        post.likes += 1
+        post.save()
+
+    return redirect('detail', list_id)
+
+def watchlist(request):
+    user = request.user
+    profile = User.objects.get(username=user)
+
+    return render(request, "auctions/watchlist.html"
+    ,{
+        "profile" : profile
+    })
+
+def category(request):
+    listing = Listing.objects.all()
+    
+    return render(request, "auctions/category.html",
+    {
+        "listing" : listing
+    })

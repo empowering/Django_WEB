@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ content.name }}</h2>
+    <li><b>Listed by</b> : {{ content.author }} </li>
+    <li><b>Price</b> : {{ content.price }}</li>
+    <li><b>added on</b> {{ content.date }}</li>
+    <li><b>Category</b> {{ content.category }}</li>
+    <li><b>{{ content.likes }}</b> are(is) <b>watching</b> this.</li>
+
+    <br>
+    <a href="{% url 'like' content.list_id %}">
+        {% if content in profile.watchlist.all %}
+            Unfavorite
+        {% else %}
+            favorite
+        {% endif %}
+    </a>
+    <br>
+    <a href="{% url 'index' %}">Back to Full List</a>
+{% endblock %}
