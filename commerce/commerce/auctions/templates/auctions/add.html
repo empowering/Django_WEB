@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Add to Listings</h2>
+    {% if message %}
+    <b>{{ message }}</b>
+    {% endif %}
+    
+    <form action="{% url 'add' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        제목 : <input type="text" name="name"><br>
+        가격 : <input type="number" name="price"><br>
+        이미지 : <input type="file" name="image"><br>
+        <input type="submit">
+    </form>
+    {% comment %} <form action="{% url 'add' %}" method = "post">
+        {% csrf_token %}
+        {{ form }}
+        <input type = "submit">
+    </form> {% endcomment %}
+    
+{% endblock %}
