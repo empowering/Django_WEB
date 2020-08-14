@@ -9,6 +9,7 @@
     <li><b>{{ content.likes }}</b> are(is) <b>watching</b> this.</li>
 
     <br>
+    <!-- 좋아요 -->
     <a href="{% url 'like' content.list_id %}">
         {% if content in profile.watchlist.all %}
             Unfavorite
@@ -17,5 +18,27 @@
         {% endif %}
     </a>
     <br>
+    <hr>
+
+    <!-- 댓글에 url 설정 안해서 욕봤다 .....  -->
+    <b>New comment</b>
+    <form action="{% url 'comment' content.list_id %}" method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Send</button>
+    </form>
+
+    <hr>
+    {% for comment in comments %}
+        <div class="comment">
+            <div class="date">{{ comment.created_date }}</div>
+            <strong>{{ comment.author }}</strong>
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+    {% empty %}
+        <p>No comments here yet :(</p>
+    {% endfor %}
+
+    <hr>
     <a href="{% url 'index' %}">Back to Full List</a>
 {% endblock %}

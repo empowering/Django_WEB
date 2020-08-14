@@ -10,27 +10,33 @@ from django.contrib.auth.decorators import login_required
 import datetime
 
 
-from .models import User, Listing
+from .models import *
+
+OPTIONS = (
+    ('clothing','Clothing'),
+    ('crafts','Crafts'),
+    ('home','Home'), 
+    ('pet','Pet'), 
+)
+
 
 class AddForm(forms.Form):
     name = forms.CharField(max_length=50)
     price = forms.FloatField()
     description = forms.CharField(max_length=100)
-    OPTIONS = (
-        ('clothing','Clothing'),
-        ('crafts','Crafts'),
-        ('home','Home'), 
-        ('pet','Pet'), 
-    )
     category = forms.ChoiceField(required=True, choices=OPTIONS)
     # image = forms.FileField()
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)
 
 def index(request):
     listing = Listing.objects.all
     return render(request, "auctions/index.html",{
         "listings" : listing
     })
-
 
 def login_view(request):
     if request.method == "POST":
@@ -96,16 +102,6 @@ def add(request):
             category = form.cleaned_data["category"]
             # image = Post(image=request.FILES['image'])
 
-            # save as dict
-            newdata = {
-                "name": name,
-                "price": price,
-                "author" : request.user,
-                "description" : description,
-                "category" : category
-                # "image" : image
-                }
-
             listing = Listing(name = name, price = price, author = request.user, description = description,
                 category = category)
             # , image = image)
@@ -125,13 +121,25 @@ def add(request):
 
 def detail(request, list_id):
     content = Listing.objects.get(list_id=list_id)
+    comment = Comment.objects.all()
+    check_comment = comment.filter(post=list_id)
+
+    if check_comment.exists():
+        comments = check_comment
+    else:
+        comments = {}
+
     user = request.user
     profile = User.objects.get(username=user)
+    form = CommentForm()
 
     return render(request, "auctions/detail.html",{
         "content" : content,
-        "profile" : profile
+        "profile" : profile,
+        "form": form,
+        "comments" : comments
     })
+
 
 @login_required
 def post_like_toggle(request, list_id):
@@ -152,6 +160,7 @@ def post_like_toggle(request, list_id):
 
     return redirect('detail', list_id)
 
+@login_required
 def watchlist(request):
     user = request.user
     profile = User.objects.get(username=user)
@@ -162,9 +171,26 @@ def watchlist(request):
     })
 
 def category(request):
-    listing = Listing.objects.all()
+    options = list(OPTIONS)
+    
+    for opt in options :
+        opt = list(opt)
     
     return render(request, "auctions/category.html",
     {
-        "listing" : listing
+        "options" : options
     })
+
+@login_required
+def comment(request, list_id):
+    post = get_object_or_404(Listing, list_id = list_id)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            comment = Comment(text=text)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+        return redirect('detail', list_id=list_id)

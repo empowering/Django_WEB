@@ -23,7 +23,14 @@ class Listing(models.Model):
     def __str__(self):
         return f"{self.list_id} : {self.name} / {self.price} / {self.date}"
 
-
 class User(AbstractUser):
     watchlist = models.ManyToManyField('Listing', blank=True, related_name='watchlist')
     
+class Comment(models.Model):
+    post = models.ForeignKey('Listing', on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(max_length=200)
+    text = models.CharField(max_length = 50)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text
