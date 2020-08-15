@@ -3,7 +3,7 @@
 Web Programming with Python(Flask && Django) and JavaScript
 
 ## Project 0 - Finance 
-### Flask & JavaScript & SQLite
+#### Flask & JavaScript & SQLite
 
 Create a website via which users can “buy” and “sell” stocks.
 1. Register 
@@ -22,7 +22,7 @@ Create a website via which users can “buy” and “sell” stocks.
 
 
 ## Project 1 - Wiki 
-### Django
+#### Django
 Design a Wikipedia-like online encyclopedia.
 
 ### Specification
@@ -45,7 +45,7 @@ Design a Wikipedia-like online encyclopedia.
 
 
 ## Project 2 - Commerce (auctions) 
-### Django & SQLite ( Only Backend )
+#### Django & SQLite ( Only Backend )
 
 Design an eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
 
