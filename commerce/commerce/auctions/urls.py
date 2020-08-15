@@ -13,5 +13,7 @@ urlpatterns = [
     path("watchlist", views.watchlist, name="watchlist"),
     path("detail/<int:list_id>", views.detail, name="detail"),
     path("detail/<int:list_id>/comment", views.comment, name='comment'),
+    path("detail/<int:list_id>/bidding", views.bidding, name='bidding'),
     path("detail/<int:list_id>/like", views.post_like_toggle, name="like"),
+    path('detail/<int:list_id>/delete',views.delete, name='delete'),
 ]
