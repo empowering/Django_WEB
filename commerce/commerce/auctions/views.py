@@ -1,3 +1,8 @@
+# - 이미지 업로드
+# - 댓글/ 게시물 삭제
+# - bidding 
+
+
 from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
@@ -18,7 +23,6 @@ OPTIONS = (
     ('home','Home'), 
     ('pet','Pet'), 
 )
-
 
 class AddForm(forms.Form):
     name = forms.CharField(max_length=50)
@@ -171,15 +175,19 @@ def watchlist(request):
     })
 
 def category(request):
-    options = list(OPTIONS)
-    
-    for opt in options :
-        opt = list(opt)
+    options = dict(OPTIONS)
     
     return render(request, "auctions/category.html",
     {
-        "options" : options
+        "options" : options.values()
     })
+
+def categoryDetail(request, category_name):
+    listings = Listing.objects.all().filter(category = category_name.lower())
+    return render(request,'auctions/category.html', {
+        "category_name" : category_name,
+        "listings" : listings
+    }) 
 
 @login_required
 def comment(request, list_id):

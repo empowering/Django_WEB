@@ -2,8 +2,18 @@
 
 {% block body %}
     <h2>Category</h2>
+    <br>
     {% for option in options %}
-        {{ option }}
+        <h5><a href="{% url 'categoryDetail' option %}">{{ option }}</a></h5>
     {% endfor %}
+
+
+    <h5>{{ category_name }}</h5>
+    {% for listing in listings %}
+        <h6><a href="{% url 'detail' listing.list_id %}">{{ listing.name }}</h6>
+    {% endfor %}
+
+
+    
 
 {% endblock %}
