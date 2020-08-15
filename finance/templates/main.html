@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+<style>
+h1 { color: black; font-family: 'Raleway',sans-serif; font-size: 30px; font-weight: 800; line-height: 72px; margin: 0 0 24px; text-align: center; text-transform: uppercase; }
+</style>
+<div class = "page-header">
+    <h1><mark>Portfolio</mark></h1>
+</div>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Name</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Price</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for value in portfolio %}
+    <tr>
+      <th scope="row">{{value[1]}}</th>
+      <td>{{value[2]}}</td>
+      <td>{{value[3]}}</td>
+      <td>{{value[4]}}</td>
+      <td>{{value[5]}}</td>
+      
+    </tr>
+
+    {% endfor %}
+    <tr>
+      <th>Cash</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>$ {{cash}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main%}
+
+
+    <form action="/quote" method="POST">
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">:)</div>
+            </div>
+            <!-- omitting name value caused an error -->
+            <input id="symbol" name="symbol" type="text" class="form-control" placeholder="Symbol">
+        </div>
+        <input id="submit" class="btn btn-primary mb-2" type="submit" disabled>
+    </form>
+    <script>
+        document.querySelector("#symbol").onkeyup = function() {
+            if (document.querySelector("#symbol").value === '') {
+                document.querySelector("#submit").disabled = true;
+            } else {
+                document.querySelector("#submit").disabled = false;
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+<div class="alert alert-info" role="alert">
+  {{ message }}
+</div>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Name</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Price</th>
+      <th scope="col">TOTAL</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for value in portfolio %}
+      <tr>
+        <th scope="row">{{value["Symbol"]}}</th>
+        <td>{{value["Name"]}}</td>
+        <td>{{value["Shares"]}}</td>
+        <td>{{value["Price"]}}</td>
+        <td>{{value["TOTAL"]}}</td>
+      </tr>
+    {% endfor %}
+      <tr>
+        <th>Cash</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>$ {{cash}}</td>
+      </tr>
+
+  </tbody>
+</table>
+{% endblock %}
+
+
