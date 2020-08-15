@@ -8,19 +8,19 @@ Design a Wikipedia-like online encyclopedia.
 ### Specification
 
 1. Index Page
-  - wiki 목록 보여주기 및 상세페이지 연결
-  - 검색 기능
+    -  wiki 목록 보여주기 및 상세페이지 연결
+    -  검색 기능
     - 정확하게 일치하는 결과가 없는 경우 검색어를 포함한 페이지 목록 보여주기
 2. Entry Page
-  - 글 수정 
+    -  글 수정 
 3. New Page
-  - 해당 포맷을 md파일로 저장
+    -  해당 포맷을 md파일로 저장
 4. Edit Page
-  - 해당 페이지 수정
+    -  해당 페이지 수정
 5. Markdown to HTML Conversion
-  - md파일 내용을 html syntax에 맞추어 반환
+    -  md파일 내용을 html syntax에 맞추어 반환
 6. Random Page
-  - 저장되어있는 wiki 중 랜덤으로 페이지 이동
+    -  저장되어있는 wiki 중 랜덤으로 페이지 이동
 
 
 
