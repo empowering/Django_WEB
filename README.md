@@ -42,6 +42,6 @@ Design an eBay-like e-commerce auction site that will allow users to post auctio
     -  View the data according to the specific category
 5. Django Admin
     -  createSuperuser
-    -  View DB
+    -  View and manage DB
 
  
