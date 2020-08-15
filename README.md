@@ -31,10 +31,15 @@ Design an eBay-like e-commerce auction site that will allow users to post auctio
   - Log-in / Log-out / Register
 2. Listing
   - Create / Edit / Delete Post
-    - Detail Page
-      - 
-3. Django Admin
+3. Detail Page
+  - Add to Favorites and view all in Watchlist
+  - Comment
+  - Bidding
+    > You can bid for the item only when your call is higher than the current bidding price
+4. Category
+  - View the data according to the specific category
+5. Django Admin
   - createSuperuser
   - View DB
-4. 
+
  
