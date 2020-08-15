@@ -37,7 +37,7 @@ Design an eBay-like e-commerce auction site that will allow users to post auctio
     -  Add to Favorites and view all in Watchlist
     -  Comment
     -  Bidding
-    **You can bid for the item only when your call is higher than the current bidding price
+        -  You can bid for the item <b> only when your call is higher than the current bidding price </b>
 4. Category
     -  View the data according to the specific category
 5. Django Admin
