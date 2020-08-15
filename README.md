@@ -25,6 +25,7 @@ Design a Wikipedia-like online encyclopedia.
 
 
 ## Project 2 - Commerce (auctions)
+
 Design an eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
 
 ### Specification
