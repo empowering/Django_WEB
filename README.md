@@ -1,8 +1,25 @@
-# Django Web
+# Web
 
-CS50’s Web Programming with Python and JavaScript
+Web Programming with Python(Flask && Django) and JavaScript
 
-## Project 1 - Wiki
+## Project 0 - Finance / Flask
+Create a website via which users can “buy” and “sell” stocks.
+1. Register 
+    -  Allows a user to register for an account via a form
+2. Quote 
+    -  Allows a user to look up a stock’s current price.
+3. Buy 
+    -  Enables a user to buy stocks within its budget.
+4. Index
+    -  Displays an HTML table summarizing, for the user currently logged in, which stocks the user owns, the numbers of shares owned, the current price of each stock, and the total value of each holding && user’s current cash balance along with a grand total (i.e., stocks’ total value plus cash).
+5. Sell 
+    -  Enables a user to sell shares of a stock of user's own.
+6. History ( Pesonal Page )
+    -  Displays an HTML table summarizing all of a user’s transactions ever, listing row by row each and every buy and every sell
+
+
+
+## Project 1 - Wiki / Django
 Design a Wikipedia-like online encyclopedia.
 
 ### Specification
@@ -24,7 +41,7 @@ Design a Wikipedia-like online encyclopedia.
 
 
 
-## Project 2 - Commerce (auctions)
+## Project 2 - Commerce (auctions) / Django
 
 Design an eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
 
