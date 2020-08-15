@@ -22,24 +22,26 @@ Design a Wikipedia-like online encyclopedia.
 6. Random Page
   - 저장되어있는 wiki 중 랜덤으로 페이지 이동
 
+
+
 ## Project 2 - Commerce (auctions)
 Design an eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
 
 ### Specification
 
 1. User
-  - Log-in / Log-out / Register
+    -  Log-in / Log-out / Register
 2. Listing
-  - Create / Edit / Delete Post
+    -  Create / Edit / Delete Post
 3. Detail Page
-  - Add to Favorites and view all in Watchlist
-  - Comment
-  - Bidding
+    -  Add to Favorites and view all in Watchlist
+    -  Comment
+    -  Bidding
     > You can bid for the item only when your call is higher than the current bidding price
 4. Category
-  - View the data according to the specific category
+    -  View the data according to the specific category
 5. Django Admin
-  - createSuperuser
-  - View DB
+    -  createSuperuser
+    -  View DB
 
  
