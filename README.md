@@ -8,7 +8,7 @@ Web Programming with Python(Flask && Django) and JavaScript
 Create a website via which users can “buy” and “sell” stocks.
 1. Register 
     -  Allows a user to register for an account via a form
-2. Quote 
+2. Quote ( API )
     -  Allows a user to look up a stock’s current price.
 3. Buy 
     -  Enables a user to buy stocks within its budget.
