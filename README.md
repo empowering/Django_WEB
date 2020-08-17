@@ -93,5 +93,5 @@ Design a front-end for an email client that makes API calls to send and receive 
         -  subject line begins with "Re:"
  
 ### Things to fix
-> sent 메일함에는 archive 버튼 hide
-> 자기 자신한테 보낸 메일 background gray
+- sent 메일함에는 archive 버튼 hide
+- 자기 자신한테 보낸 메일 background gray
