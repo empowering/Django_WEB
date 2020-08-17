@@ -66,4 +66,32 @@ Design an eBay-like e-commerce auction site that will allow users to post auctio
     -  createSuperuser
     -  View and manage DB
 
+
+
+## Project 3 - Mail 
+#### Django & Javascript 
+
+Design a front-end for an email client that makes API calls to send and receive emails.
+
+### Specification
+
+1. Send Mail:
+    -  make a POST request to /emails, passing in values for recipients, subject, and body
+2. Mailbox: 
+    -  Inbox / Sent mailbox / Archive
+        -  make a GET request to /emails/<mailbox> to request the emails for a particular mailbox
+        -  When a mailbox is visited, the application first queries the API for the latest emails in that mailbox.
+        -  If the email is unread, it appears with a white background. If not, it appears with a gray background.
+3. View Email:
+    -  make a GET request to /emails/<email_id> to request the email
+    -  Once the email has been clicked on, application marks the email as read. 
+4. Archive and Unarchive:
+    -  When viewing an Inbox email, the user is presented with a button that lets them archive the email. When viewing an Archive email, the user is presented with a button that lets them unarchive the email. 
+5. Reply:
+    -  When the user is presented with reply view, composition form is pre-filled with 
+        -  the recipient field set to whoever sent the original email
+        -  subject line begins with "Re:"
  
+### Things to fix
+> sent 메일함에는 archive 버튼 hide
+> 자기 자신한테 보낸 메일 background gray
