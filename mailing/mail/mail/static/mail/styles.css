@@ -2,7 +2,7 @@ textarea {
     min-height: 400px;
 }
 
-#mail_each,
+.mail_each,
 #mailview {
     width: 500px;
     border: 2px solid black;

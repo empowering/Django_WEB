@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   load_mailbox('inbox');
 });
 
+// 메일 작성하기 
 function compose_email() {
 
   // Show compose view and hide other views
@@ -24,6 +25,7 @@ function compose_email() {
 
 }
 
+// 메일함 확인하기
 function load_mailbox(mailbox) {
   
   // Show the mailbox and hide other views
@@ -34,16 +36,14 @@ function load_mailbox(mailbox) {
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
+  let num = 0;
   // Find mailbox from server
   fetch(`/emails/${mailbox}`)
   .then(response => response.json())
   .then(emails => {
-
+    
     emails
     .forEach(email => {
-
-      // if mail is read, pass 
-      // var passing = true;
 
       sender = '';
       if (mailbox === 'sent') {
@@ -51,13 +51,14 @@ function load_mailbox(mailbox) {
       }
       else 
       {
-      sender = email.sender;
+        sender = email.sender;
       }
       const subject = email.subject;
       const timestamp = email.timestamp;
 
       const eachmail = document.createElement('div');
-      eachmail.setAttribute("id", "mail_each");
+      eachmail.setAttribute("id", `mail_each${num}`);
+      eachmail.setAttribute("class", `mail_each`);
       document.querySelector('#emails-view').append(eachmail);
 
       const sender_div = document.createElement('div');
@@ -75,33 +76,41 @@ function load_mailbox(mailbox) {
       time_stamp.innerHTML = timestamp;
       eachmail.appendChild(time_stamp);
 
+      // if mail is read
+      if(email.read) {
+        eachmail.style.background = 'gray';
+      }
+      else {
+        eachmail.style.background = 'white';
+      }
+
       // if clicked, show mail
       eachmail.addEventListener("click", () => {
         show_mail(email.id, mailbox);
       });
 
+      num = num + 1;
+
     });
   });
 }
 
+// 메일 읽기 
 function show_mail(id, mailbox) {
   document.querySelector("#emails-view").style.display = "none";
   document.querySelector("#compose-view").style.display = "none";
   document.querySelector("#each-mail").style.display = "block";
 
-  // 메일 불러오기 
+  // 메일 내용 불러오기 
   fetch(`/emails/${id}`)
     .then((response) => response.json())
     .then((email) => {
-      
+
       const sender = email.sender;
       const subject = email.subject;
       const body = email.body;
       const timestamp = email.timestamp;
   
-
-      // if (email.is_read)? ;
-      email.read = true;
       let archive = (email.archived)? "Unarchive":"Archive";
       
       content = `
@@ -125,11 +134,13 @@ function show_mail(id, mailbox) {
 
       // to archive
       document.querySelector('#archive').addEventListener("click", () => {
-        toggle_archive(id, email.archived)
+        toggle_archive(id, email.archived);
         if (archive.innerText == "Archive") archive.innerText = "Unarchive";
         else archive.innerText = "Archive";
       });
 
+      // 읽음으로 표시
+      is_read(id);
     })
 
 }
@@ -157,4 +168,13 @@ function toggle_archive(id, state) {
 
   // 
   load_mailbox('archive');
+}
+
+function is_read(id) {
+  fetch(`/emails/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      read: true,
+    }),
+  });
 }

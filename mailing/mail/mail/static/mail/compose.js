@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     
       // redirect
-      return true;
+      return false;
 
     });
   });
