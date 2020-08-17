@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>Hello</title>
+    </head>
+    <body>
+        <!-- <h1>hello</h1> -->
+        <div id="app" />
+        
+        <script type="text/babel">
+
+            class App extends React.Component {
+
+                constructor(props) { //  when the component is first created
+                    super(props); // sets up the object based on the React.Component class
+                    this.state = {
+                        num1: 1,
+                        num2: 1,
+                        response: '',
+                        score: 0
+                    };
+                }
+
+                count = () => {
+                    this.setState(state => ({ // this.setState funtion take as argument a function from the old state to the new state.
+                        score: state.score + 1
+                    }))
+                }
+
+                updateResponse = (event) => {
+                    this.setState({
+                        response: event.target.value
+                    });
+                }
+
+                inputKeyPress = (event) => {
+                    
+                    // Check if the Enter key was pressed
+                    if (event.key === 'Enter') {
+                
+                        // Extract answer
+                        const answer = parseInt(this.state.response)
+                
+                        // Check if answer is correct
+                        if (answer === this.state.num1 + this.state.num2) {
+                            this.setState(state => ({
+                                score: state.score + 1,
+                                num1: Math.ceil(Math.random() * 10),
+                                num2: Math.ceil(Math.random() * 10),
+                                response: ''
+                            }));
+                        } else {
+                            this.setState(state => ({
+                                score: state.score - 1,
+                                response: ''
+                            }));
+                        }
+                    }
+                }
+
+                render() { 
+                    return (
+                        <div>
+                            <div>{this.state.num1} + {this.state.num2}</div>
+                            <input type="text" value={this.state.response} onChange={this.updateResponse} onKeyPress={this.inputKeyPress}/>
+                            <div> Score: {this.state.score}</div>
+                        </div>
+                    );
+                }
+
+            }
+             
+            ReactDOM.render(<App />, document.querySelector("#app"));
+        </script>
+
+    </body>
+</html>
