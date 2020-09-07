@@ -19,6 +19,11 @@ Create a website via which users can “buy” and “sell” stocks.
 6. History ( Pesonal Page )
     -  Displays an HTML table summarizing all of a user’s transactions ever, listing row by row each and every buy and every sell
 
+- install requirements
+```
+pip3 install cs50
+pip3 install flask-session
+```
 
 
 ## Project 1 - Wiki 
