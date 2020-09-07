@@ -23,6 +23,8 @@ Create a website via which users can “buy” and “sell” stocks.
 ```
 pip3 install cs50
 pip3 install flask-session
+export API_KEY=#####
+python3 application.py
 ```
 
 
